@@ -1,0 +1,8 @@
+/* Icon tiles and empty-state badges. */
+
+.icon-tile { display: inline-grid; place-items: center; flex: none; border-radius: var(--r-md); background: var(--primary-soft); color: var(--primary); border: 1px solid var(--primary-line); }
+
+.scene { display: inline-grid; place-items: center; width: 56px; height: 56px; border-radius: 50%; flex: none; }
+.scene.tone-ok { background: var(--ok-bg); color: var(--ok); box-shadow: 0 0 0 8px rgba(21, 127, 59, 0.05); }
+.scene.tone-info { background: var(--info-bg); color: var(--info); box-shadow: 0 0 0 8px rgba(26, 86, 199, 0.05); }
+.scene.tone-muted { background: var(--surface-3); color: var(--text-3); box-shadow: 0 0 0 8px rgba(15, 27, 45, 0.03); }

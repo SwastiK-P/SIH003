@@ -1,0 +1,89 @@
+/*
+ * Design tokens. An institutional system: navy for identity, one action blue, cool neutral greys,
+ * 1px borders instead of shadows, small radii, Inter throughout and a mono face for identifiers.
+ */
+
+:root {
+  color-scheme: light;
+
+  /* Identity */
+  --navy-950: #071427;
+  --navy-900: #0b1d38;
+  --navy-800: #102a4f;
+  --navy-700: #173968;
+  --navy-600: #1f4b85;
+  --saffron: #e07b24;          /* used only in the mark and one rule */
+
+  /* Action */
+  --primary: #1a56c7;
+  --primary-hover: #1546a5;
+  --primary-press: #123c8d;
+  --primary-soft: #eaf1fd;
+  --primary-line: #c3d6f7;
+  --focus: rgba(26, 86, 199, 0.32);
+
+  /* Neutrals */
+  --bg: #f4f6f9;
+  --surface: #ffffff;
+  --surface-2: #f8fafc;
+  --surface-3: #f1f4f8;
+  --border: #e3e8ef;
+  --border-strong: #cdd5df;
+  --text: #0f1b2d;
+  --text-2: #4a5768;
+  --text-3: #8592a3;
+  --hover: #f3f6fa;
+  --selected: #eaf1fd;
+
+  /* Status: always with a word or an icon beside it */
+  --ok: #157f3b;      --ok-bg: #ecf8f0;      --ok-line: #bfe6cd;
+  --warn: #a95c00;    --warn-bg: #fff6e6;    --warn-line: #f6d9a8;
+  --bad: #c0262d;     --bad-bg: #fdf0f0;     --bad-line: #f3c4c6;
+  --info: #1a56c7;    --info-bg: #eef4fe;    --info-line: #c9dbf8;
+
+  /* Seat types, in this fixed order (validated for colour-vision deficiency) */
+  --s-regular: #2a6fd6;
+  --s-tfw: #1a9e72;
+  --s-fn: #6250d6;
+  --s-lateral: #d99400;
+  --track: #e6ebf1;
+
+  --shadow-xs: 0 1px 2px rgba(15, 27, 45, 0.05);
+  --shadow-sm: 0 1px 3px rgba(15, 27, 45, 0.08), 0 1px 2px rgba(15, 27, 45, 0.04);
+  --shadow-md: 0 8px 24px -6px rgba(15, 27, 45, 0.16), 0 2px 6px rgba(15, 27, 45, 0.06);
+  --shadow-lg: 0 24px 60px -12px rgba(7, 20, 39, 0.35);
+
+  --r-sm: 4px;
+  --r: 6px;
+  --r-md: 8px;
+  --r-lg: 10px;
+
+  --font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --serif: "Newsreader", Georgia, "Times New Roman", serif;   /* certificates only */
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-out: cubic-bezier(0.4, 0, 1, 1);
+
+  --sidebar-w: 256px;
+  --topbar-h: 60px;
+  --control-h: 36px;
+  --gap: 16px;
+
+  /* Names kept from the first version so components keep working */
+  --label: var(--text);
+  --secondary: var(--text-2);
+  --tertiary: var(--text-3);
+  --card: var(--surface);
+  --line: var(--border);
+  --line-strong: var(--border-strong);
+  --separator: var(--border);
+  --menu-hover: var(--hover);
+  --accent: var(--primary);
+  --accent-soft: var(--primary-soft);
+  --red: var(--bad);
+  --green: var(--ok);
+  --bad-soft: var(--bad-bg);
+  --warn-soft: var(--warn-bg);
+  --ok-soft: var(--ok-bg);
+}
+@media (pointer: coarse) { :root { --control-h: 44px; } }

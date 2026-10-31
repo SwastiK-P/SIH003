@@ -6,5 +6,5 @@ export default defineConfig({
   root: fileURLToPath(new URL(".", import.meta.url)),
   plugins: [react()],
   server: { port: 5180, proxy: { "/api": { target: "http://localhost:4100", changeOrigin: false } } },
-  build: { outDir: "dist", emptyOutDir: true },
+  build: { outDir: "../dist", emptyOutDir: true },
 });

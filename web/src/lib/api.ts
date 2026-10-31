@@ -20,6 +20,7 @@ export async function api<T = any>(path: string, opts: { method?: string; body?:
   });
   const data = res.headers.get("content-type")?.includes("json") ? await res.json() : await res.text();
   if (!res.ok) throw new ApiError((data as any)?.error ?? (data as any)?.message ?? "Something went wrong.", res.status);
+  if (typeof data === "string") throw new ApiError("Can't reach the registry API.", 502);
   return data as T;
 }
 

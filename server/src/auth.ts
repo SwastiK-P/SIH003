@@ -2,7 +2,7 @@ import { createHash, createHmac, randomBytes, timingSafeEqual } from "node:crypt
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 import type { NextFunction, Request, Response } from "express";
-import { DATA_DIR, get, now, run } from "./db.js";
+import { DATA_DIR, SERVERLESS, get, now, run } from "./db.js";
 
 /**
  * Sessions and role-based access. In production sign-in would come from the AICTE portal's SSO (staff,
@@ -35,7 +35,8 @@ const keyDir = resolve(DATA_DIR, "keys");
 mkdirSync(keyDir, { recursive: true });
 const secretFile = resolve(keyDir, "session.secret");
 if (!existsSync(secretFile)) writeFileSync(secretFile, randomBytes(32).toString("hex"), { mode: 0o600 });
-const SECRET = readFileSync(secretFile, "utf8").trim();
+// Function instances don't share /tmp, so they share a fixed sandbox secret instead.
+const SECRET = process.env.SESSION_SECRET ?? (SERVERLESS ? "apaar-sandbox-demo" : readFileSync(secretFile, "utf8").trim());
 
 const mac = (s: string) => createHmac("sha256", SECRET).update(s).digest("base64url");
 

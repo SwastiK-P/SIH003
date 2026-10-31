@@ -6,7 +6,9 @@ import { fileURLToPath } from "node:url";
 /** The central repository. One SQLite file; the schema mirrors what AICTE would hold per student. */
 
 export const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
-export const DATA_DIR = resolve(ROOT, "data");
+/** On Netlify the API runs as a function: a throwaway sandbox database in /tmp, reseeded on each cold start. */
+export const SERVERLESS = !!process.env.AWS_LAMBDA_FUNCTION_NAME;
+export const DATA_DIR = SERVERLESS ? "/tmp/apaar" : resolve(ROOT, "data");
 mkdirSync(DATA_DIR, { recursive: true });
 
 export const db = new DatabaseSync(resolve(DATA_DIR, "registry.db"));

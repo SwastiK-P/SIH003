@@ -5,7 +5,8 @@ import { fileURLToPath } from "node:url";
 
 /** The central repository. One SQLite file; the schema mirrors what AICTE would hold per student. */
 
-export const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
+// import.meta.url is empty in Netlify's CommonJS bundle; ROOT only matters when running from the repo.
+export const ROOT = import.meta.url ? resolve(dirname(fileURLToPath(import.meta.url)), "../..") : process.cwd();
 /** On Netlify the API runs as a function: a throwaway sandbox database in /tmp, reseeded on each cold start. */
 export const SERVERLESS = !!process.env.AWS_LAMBDA_FUNCTION_NAME;
 export const DATA_DIR = SERVERLESS ? "/tmp/apaar" : resolve(ROOT, "data");

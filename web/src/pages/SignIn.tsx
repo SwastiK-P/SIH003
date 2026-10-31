@@ -18,7 +18,7 @@ const WHAT: Record<string, string> = {
 
 /** The sandbox has four accounts, one per role. */
 export function SignIn() {
-  const { data } = useApi("/accounts");
+  const { data, error } = useApi("/accounts");
   const { signIn } = useSession();
   const nav = useNavigate();
   const ui = useUi();
@@ -43,7 +43,8 @@ export function SignIn() {
                 {busy === a.id ? <Icon.Spinner className="spin secondary" size={18} /> : <Icon.Next size={18} className="tertiary" />}
               </button>
             ))}
-            {!data && <div style={{ padding: 24 }}><div className="progress-sweep" /></div>}
+            {!data && !error && <div style={{ padding: 24 }}><div className="progress-sweep" /></div>}
+            {error && <div style={{ padding: 24 }}><div className="notice bad"><Icon.Info /><div style={{ fontSize: 13 }}>{error}</div></div></div>}
           </section>
           <div className="panel" style={{ marginTop: 14 }}>
             <div className="notice info"><Icon.Info /><div style={{ fontSize: 13 }}>In production, AICTE staff and institutions sign in through AICTE single sign-on, and students through DigiLocker. Every sign-in is recorded in the audit trail.</div></div>

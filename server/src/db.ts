@@ -1,4 +1,4 @@
-import { DatabaseSync } from "node:sqlite";
+import type { DatabaseSync as DB } from "node:sqlite";
 import { mkdirSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -11,7 +11,9 @@ export const SERVERLESS = !!process.env.AWS_LAMBDA_FUNCTION_NAME;
 export const DATA_DIR = SERVERLESS ? "/tmp/apaar" : resolve(ROOT, "data");
 mkdirSync(DATA_DIR, { recursive: true });
 
-export const db = new DatabaseSync(resolve(DATA_DIR, "registry.db"));
+// Loaded at runtime: Netlify's bundler rewrites a static "node:sqlite" import to a missing "sqlite" package.
+const { DatabaseSync } = process.getBuiltinModule("node:sqlite") as typeof import("node:sqlite");
+export const db: DB = new DatabaseSync(resolve(DATA_DIR, "registry.db"));
 db.exec("PRAGMA journal_mode = WAL; PRAGMA foreign_keys = ON;");
 
 db.exec(`
